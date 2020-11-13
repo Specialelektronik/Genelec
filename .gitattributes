@@ -1,0 +1,45 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Declare files that are text files
+.gitattributes text
+.gitignore text
+*.md text
+*.usp text
+
+# Denote all files that are truly binary and should not be modified
+#Crestron
+*.uf binary
+*.ir binary 
+*.zip binary
+*.vtz binary
+*.ush binary
+*.umc binary
+*.smw binary
+*.lpz binary
+*.spz binary
+*.sig binary
+*.vtp binary
+*.vtz binary
+*.vta binary
+*.sm2 binary
+*.ASV binary
+
+# Custom for Visual Studio
+*.cs     diff=csharp
+*.sln    merge=union
+*.csproj merge=union
+*.vbproj merge=union
+*.fsproj merge=union
+*.dbproj merge=union
+
+# Documents
+*.doc binary
+*.DOC binary
+*.docx binary
+*.DOCX binary
+*.pdf binary
+*.PDF binary
+*.rtf binary
+*.RTF binary
+
