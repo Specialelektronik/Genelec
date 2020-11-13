@@ -1,0 +1,225 @@
+/*
+Dealer Name: JaDeVa AB
+Programmer: Niklas Olsson - JaDeVa AB
+*/
+
+/*******************************************************************************************
+  Compiler Directives
+*******************************************************************************************/
+// #DEFINE_CONSTANT
+#CATEGORY "46" "Genelec" // Custom
+#HELP_PDF_FILE "Genelec_Speaker_1.0.0_SE.pdf"
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+
+#HELP_BEGIN
+Do you want to send custom commands?
+We have prepared that for you.
+
+To send a GET-request use:
+_device.CustomGet(url);
+
+
+Example: 
+String jsonResponse[255];
+jsonResponse = _device.CustomGet("public/v1/audio/volume");
+
+
+To send a PUT-request use:
+_device.CustomSet(url, json);
+
+Example:
+Integer success;
+success = _device.CustomSet("public/v1/audio/volume", "{\"level\":-23.5}");
+if (success)
+    //command success
+else
+    //command failed
+#HELP_END
+
+
+/*******************************************************************************************
+  Include Libraries
+*******************************************************************************************/
+#INCLUDEPATH "..\\Genelec_Speaker_CSharp\\bin\\Release"
+#USER_SIMPLSHARP_LIBRARY "Genelec_Speaker_CSharp"
+/*******************************************************************************************
+  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+*******************************************************************************************/
+DIGITAL_INPUT _skip_;
+DIGITAL_INPUT _skip_;
+DIGITAL_INPUT _skip_;
+DIGITAL_INPUT Debug;
+DIGITAL_INPUT _skip_;
+DIGITAL_INPUT Poll_Device_Info;
+DIGITAL_INPUT Poll_Power_and_Audio;
+DIGITAL_INPUT _skip_;
+DIGITAL_INPUT Power_Activate;
+DIGITAL_INPUT Power_Standby;
+DIGITAL_INPUT Power_Boot;
+DIGITAL_INPUT _skip_;
+DIGITAL_INPUT _skip_;
+DIGITAL_INPUT Mute_On;
+DIGITAL_INPUT Mute_Off;
+DIGITAL_INPUT Mute_Toggle;
+DIGITAL_INPUT _skip_;
+ANALOG_INPUT Volume_Level_Percent;
+ANALOG_INPUT Volume_Level_dB;
+ANALOG_INPUT _skip_;
+ANALOG_INPUT _skip_;
+ANALOG_INPUT Recall_Profile;
+ANALOG_INPUT Recall_and_Set_Startup_Profile;
+ANALOG_INPUT _skip_;
+ANALOG_INPUT _skip_;
+ANALOG_INPUT _skip_;
+STRING_INPUT Device_IP[50];
+STRING_INPUT Device_Port[5];
+
+
+DIGITAL_OUTPUT _skip_;
+DIGITAL_OUTPUT _skip_;
+DIGITAL_OUTPUT _skip_;
+DIGITAL_OUTPUT _skip_;
+DIGITAL_OUTPUT _skip_;
+DIGITAL_OUTPUT Responding;
+DIGITAL_OUTPUT _skip_;
+DIGITAL_OUTPUT _skip_;
+DIGITAL_OUTPUT Power_Active_FB;
+DIGITAL_OUTPUT Power_Standby_FB;
+DIGITAL_OUTPUT _skip_;
+DIGITAL_OUTPUT Power_15W;
+DIGITAL_OUTPUT _skip_;
+DIGITAL_OUTPUT Mute_On_FB;
+DIGITAL_OUTPUT Mute_Off_FB;
+DIGITAL_OUTPUT _skip_;
+DIGITAL_OUTPUT _skip_;
+ANALOG_OUTPUT Volume_Level_Percent_FB;
+ANALOG_OUTPUT Volume_Level_dB_FB;
+STRING_OUTPUT Volume_Level_dB_FB_Text;
+ANALOG_OUTPUT _skip_;
+ANALOG_OUTPUT _skip_;
+ANALOG_OUTPUT _skip_;
+ANALOG_OUTPUT _skip_;
+ANALOG_OUTPUT Allocated_PoE_Power;
+ANALOG_OUTPUT _skip_;
+STRING_OUTPUT Model;
+STRING_OUTPUT Firmware_ID;
+STRING_OUTPUT Build;
+STRING_OUTPUT Base_ID;
+STRING_OUTPUT Hardware_ID;
+STRING_OUTPUT Category;
+STRING_OUTPUT Technology;
+STRING_OUTPUT API_Version;
+
+/*******************************************************************************************
+  Parameters
+*******************************************************************************************/
+STRING_PARAMETER Device_IP_Param[40];
+INTEGER_PARAMETER Device_Port_Param;
+
+/*******************************************************************************************
+  Parameter Properties
+*******************************************************************************************/
+#BEGIN_PARAMETER_PROPERTIES Device_IP_Param
+   propValidUnits = unitString;
+   propDefaultUnit = unitString;
+   propDefaultValue = "0.0.0.0";
+#END_PARAMETER_PROPERTIES
+#BEGIN_PARAMETER_PROPERTIES Device_Port_Param
+   propValidUnits = unitDecimal;
+   propDefaultUnit = unitDecimal;
+   propDefaultValue = 9000d;
+#END_PARAMETER_PROPERTIES
+/*******************************************************************************************
+  Global Variables
+*******************************************************************************************/
+
+// INTEGER
+GenelecSpeakerWrapper _device;
+
+/*******************************************************************************************
+  Functions
+*******************************************************************************************/
+Callback Function OnSetRespondingFb(Integer value)              { Responding = value; }
+Callback Function OnSetPowerActiveFb(Integer value)             { Power_Active_FB = value; }
+Callback Function OnSetPowerStandbyFb(Integer value)            { Power_Standby_FB = value; }
+Callback Function OnSetPower15WFb(Integer value)                { Power_15W = value; }
+Callback Function OnSetLevelDbFb(Signed_Integer value)          { Volume_Level_dB_FB = value; }
+Callback Function OnSetLevelDbTextFb(String value)              { Volume_Level_dB_FB_Text = value; }
+Callback Function OnSetLevelPercentFb(Integer value)            { Volume_Level_Percent_FB = value; }
+Callback Function OnSetAllocatedPowerFb(Integer value)          { Allocated_PoE_Power = value; }
+Callback Function OnSetModelFb(String value)                    { Model = value; }
+Callback Function OnSetFirmwareIdFb(String value)               { Firmware_ID = value; }
+Callback Function OnSetBuildFb(String value)                    { Build = value; }
+Callback Function OnSetBaseIdFb(String value)                   { Base_ID = value; }
+Callback Function OnSetHardwareIdFb(String value)               { Hardware_ID = value; }
+Callback Function OnSetCategoryFb(String value)                 { Category = value; }
+Callback Function OnSetTechnologyFb(String value)               { Technology = value; }
+Callback Function OnSetApiVersionFb(String value)               { API_Version = value; }
+Callback Function OnSetMuteFb(Integer value)                    
+{ 
+    if (value)
+    {
+        Mute_Off_FB = 0;
+        Mute_On_FB = 1; 
+    }
+    else 
+    {
+        Mute_On_FB = 0; 
+        Mute_Off_FB = 1;
+    }
+}
+
+/*******************************************************************************************
+  Event Handlers
+*******************************************************************************************/
+THREADSAFE CHANGE Debug                           { _device.Debug = Debug; }
+PUSH Poll_Device_Info                             { _device.PollDeviceInfo(); }
+THREADSAFE CHANGE Poll_Power_and_Audio            { _device.PollPowerAndAudio(Poll_Power_and_Audio); }
+
+PUSH Power_Activate                               { _device.PowerActivate(); }
+PUSH Power_Standby                                { _device.PowerStandby(); }
+PUSH Power_Boot                                   { _device.PowerBoot(); }
+
+PUSH Mute_On                                      { _device.Mute = 1; }
+PUSH Mute_Off                                     { _device.Mute = 0; }
+PUSH Mute_Toggle                                  { _device.MuteToggle(); }
+
+THREADSAFE CHANGE Volume_Level_dB                 { _device.LevelDb = Volume_Level_dB; }
+THREADSAFE CHANGE Volume_Level_Percent            { _device.LevelPercent = Volume_Level_Percent; }
+
+THREADSAFE CHANGE Recall_Profile                  { _device.RecallProfile(Recall_Profile, 0); }
+THREADSAFE CHANGE Recall_and_Set_Startup_Profile  { _device.RecallProfile(Recall_and_Set_Startup_Profile, 1); }
+
+CHANGE Device_IP                                  { _device.Ip = Device_IP; }
+CHANGE Device_Port                                { _device.Port = Atoi(Device_Port); }
+
+/*******************************************************************************************
+  Main()
+*******************************************************************************************/
+Function Main()
+{
+    _device.Ip = Device_IP_Param;
+    _device.Port = Device_Port_Param;
+
+    RegisterDelegate(_device, SetRespondingFb, OnSetRespondingFb);
+    RegisterDelegate(_device, SetPowerActiveFb, OnSetPowerActiveFb);
+    RegisterDelegate(_device, SetPowerStandbyFb, OnSetPowerStandbyFb);
+    RegisterDelegate(_device, SetPower15WFb, OnSetPower15WFb);
+    RegisterDelegate(_device, SetMuteFb, OnSetMuteFb);
+    RegisterDelegate(_device, SetLevelDbFb, OnSetLevelDbFb);
+    RegisterDelegate(_device, SetLevelDbTextFb, OnSetLevelDbTextFb);
+    RegisterDelegate(_device, SetLevelPercentFb, OnSetLevelPercentFb);
+    RegisterDelegate(_device, SetAllocatedPowerFb, OnSetAllocatedPowerFb);
+    RegisterDelegate(_device, SetModelFb, OnSetModelFb);
+    RegisterDelegate(_device, SetFirmwareIdFb, OnSetFirmwareIdFb);
+    RegisterDelegate(_device, SetBuildFb, OnSetBuildFb);
+    RegisterDelegate(_device, SetBaseIdFb, OnSetBaseIdFb);
+    RegisterDelegate(_device, SetHardwareIdFb, OnSetHardwareIdFb);
+    RegisterDelegate(_device, SetCategoryFb, OnSetCategoryFb);
+    RegisterDelegate(_device, SetTechnologyFb, OnSetTechnologyFb);
+    RegisterDelegate(_device, SetApiVersionFb, OnSetApiVersionFb);
+    // WaitForInitializationComplete();
+}
+

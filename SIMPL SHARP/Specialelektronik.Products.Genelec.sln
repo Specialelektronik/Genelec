@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specialelektronik.Products.Genelec.SmartIp", "Specialelektronik.Products.Genelec.SmartIp\Specialelektronik.Products.Genelec.SmartIp.csproj", "{FB04C43C-AEB7-4107-A302-84A5E3D16276}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specialelektronik.Products.Genelec.Test", "Specialelektronik.Products.Genelec.Test\Specialelektronik.Products.Genelec.Test.csproj", "{B3AE001E-92CF-42A5-B682-F69F7DBD14DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Genelec_Speaker_CSharp", "Genelec_Speaker_CSharp\Genelec_Speaker_CSharp.csproj", "{7DFC1B8C-5DC9-408C-9CA5-F2ED452486CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB04C43C-AEB7-4107-A302-84A5E3D16276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB04C43C-AEB7-4107-A302-84A5E3D16276}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB04C43C-AEB7-4107-A302-84A5E3D16276}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB04C43C-AEB7-4107-A302-84A5E3D16276}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3AE001E-92CF-42A5-B682-F69F7DBD14DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3AE001E-92CF-42A5-B682-F69F7DBD14DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3AE001E-92CF-42A5-B682-F69F7DBD14DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3AE001E-92CF-42A5-B682-F69F7DBD14DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DFC1B8C-5DC9-408C-9CA5-F2ED452486CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DFC1B8C-5DC9-408C-9CA5-F2ED452486CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DFC1B8C-5DC9-408C-9CA5-F2ED452486CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DFC1B8C-5DC9-408C-9CA5-F2ED452486CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
